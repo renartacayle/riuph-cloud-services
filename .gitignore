@@ -1,0 +1,7 @@
+node_modules
+apps/ats/dist
+apps/checker/dist
+dist
+.env
+*.local
+.DS_Store

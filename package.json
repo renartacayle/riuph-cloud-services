@@ -1,0 +1,33 @@
+{
+  "name": "riuph-cloud-services",
+  "version": "1.0.0",
+  "description": "Unified Multi-Domain Engine for ATS Master Screener (ats.riuph.me) and Academic Plagiarism & AI Checker (checker.riuph.me)",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "build:ats": "vite build --config apps/ats/vite.config.js",
+    "build:checker": "vite build --config apps/checker/vite.config.js",
+    "build": "npm run build:ats && npm run build:checker",
+    "start": "node server.js",
+    "server": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "docx": "^9.8.1",
+    "express": "^5.2.1",
+    "jspdf": "^4.2.1",
+    "lucide-react": "^1.49.0",
+    "mammoth": "^1.13.0",
+    "multer": "^2.4.0",
+    "pdf-parse": "^2.4.5",
+    "qrcode": "^1.5.4",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^6.1.1",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.3.1"
+  }
+}
