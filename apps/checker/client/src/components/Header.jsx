@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FileText, Bot, Award, GraduationCap, RefreshCw, Upload, ShieldCheck, Sparkles, Building2, Edit2, Check } from "lucide-react";
+import { FileText, Bot, Award, GraduationCap, RefreshCw, Upload, ShieldCheck, Sparkles, Building2, Edit2, Check, Heart } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import LanguageSwitcher from "./LanguageSwitcher.jsx";
 
@@ -10,6 +10,7 @@ export default function Header({
   setStudentInfo,
   faculties = [],
   onOpenUpload,
+  onOpenDonate,
   similarityScore,
   aiScore,
   onRunCheck,
@@ -88,9 +89,18 @@ export default function Header({
           </div>
         </div>
 
-        {/* Student & Discipline Selector + Language Switcher */}
+        {/* Student & Discipline Selector + Language Switcher + Donate */}
         <div className="flex items-center space-x-1.5 sm:space-x-2 text-xs shrink-0">
           <LanguageSwitcher />
+
+          <button
+            onClick={onOpenDonate}
+            className="flex items-center gap-1.5 bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-semibold px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg shadow-md shadow-rose-500/20 transition transform hover:scale-105 cursor-pointer"
+            title="Dukung Pengembang / Donate"
+          >
+            <Heart className="w-3.5 h-3.5 fill-white text-white" />
+            <span className="hidden sm:inline">Dukung / Donasi</span>
+          </button>
 
           <div className="bg-slate-900/90 px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg border border-slate-700/70 flex items-center space-x-1 sm:space-x-2 shadow-xs">
             <span className="text-slate-400 font-medium hidden md:inline">{lang === "en" ? "Field:" : "Bidang:"}</span>

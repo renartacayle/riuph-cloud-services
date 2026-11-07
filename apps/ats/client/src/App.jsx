@@ -10,10 +10,11 @@ import BulletOptimizer from "./components/BulletOptimizer.jsx";
 import ClichésAndHygiene from "./components/ClichésAndHygiene.jsx";
 import DocumentInspector from "./components/DocumentInspector.jsx";
 import ExportReportModal from "./components/ExportReportModal.jsx";
+import DonateModal from "./components/DonateModal.jsx";
 import AdBanner from "./components/AdBanner.jsx";
 import { useIsDesktop } from "./hooks/useIsDesktop.js";
 
-import { Award, Layers, Tag, TrendingUp, Sparkles, MessageSquareWarning, FileCode, AlertCircle, ShieldCheck } from "lucide-react";
+import { Award, Layers, Tag, TrendingUp, Sparkles, MessageSquareWarning, FileCode, AlertCircle, ShieldCheck, Heart } from "lucide-react";
 import { useLanguage } from "./context/LanguageContext.jsx";
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState("overview");
   const [showExportModal, setShowExportModal] = useState(false);
+  const [showDonateModal, setShowDonateModal] = useState(false);
   const [lastCvText, setLastCvText] = useState("");
 
   const handleScanText = async (cvText, jdText) => {
@@ -102,7 +104,11 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col text-slate-800">
-      <Header onReset={handleReset} hasResult={!!result} />
+      <Header 
+        onReset={handleReset} 
+        hasResult={!!result} 
+        onOpenDonate={() => setShowDonateModal(true)} 
+      />
 
       {/* Responsive 3-Column Layout: Left/Right ads on Desktop, Top/Bottom ads on Mobile */}
       <div className="flex-1 w-full max-w-[1536px] mx-auto px-2 sm:px-4 lg:px-6 py-6 flex justify-center items-start gap-4 2xl:gap-8">
@@ -249,6 +255,12 @@ export default function App() {
         />
       )}
 
+      {/* Donate Modal */}
+      <DonateModal
+        isOpen={showDonateModal}
+        onClose={() => setShowDonateModal(false)}
+      />
+
       {/* Footer */}
       <footer className="border-t border-slate-200 bg-white py-6 mt-12 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -260,6 +272,14 @@ export default function App() {
             </span>
           </div>
           <div className="flex items-center gap-4">
+            <button
+              onClick={() => setShowDonateModal(true)}
+              className="text-rose-600 hover:text-rose-700 font-semibold flex items-center gap-1 bg-rose-50 hover:bg-rose-100 px-2.5 py-1 rounded-md border border-rose-200 transition cursor-pointer"
+            >
+              <Heart className="w-3.5 h-3.5 fill-rose-600" />
+              Traktir Kopi / Donasi
+            </button>
+            <span className="text-slate-300">•</span>
             <span className="text-slate-400">Replikasi: Jobscan, Workday, Greenhouse, Glints/Jobstreet</span>
             <span className="text-slate-300">•</span>
             <a

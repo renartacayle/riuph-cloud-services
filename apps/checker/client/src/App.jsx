@@ -8,10 +8,12 @@ import DefenseQuestions from "./components/DefenseQuestions.jsx";
 import ParafraseHelper from "./components/ParafraseHelper.jsx";
 import CertificateModal from "./components/CertificateModal.jsx";
 import UploadModal from "./components/UploadModal.jsx";
+import DonateModal from "./components/DonateModal.jsx";
 import AdBanner from "./components/AdBanner.jsx";
 import { useIsDesktop } from "./hooks/useIsDesktop.js";
 import { SAMPLE_THESES } from "./data/samples.js";
 import { useLanguage } from "./context/LanguageContext.jsx";
+import { Heart } from "lucide-react";
 
 const UNIVERSAL_FACULTIES = [
   { id: "FIK", name: "Ilmu Komputer & Informatika", nameEn: "Computer Science & Informatics", maxSimilarity: 20, maxAiAllowed: 20, specialNotes: "Sidang mewajibkan demonstrasi sistem fungsional, review clean code di IDE, dan pengujian keaslian logika algoritma.", programs: ["Teknik Informatika - S1", "Sistem Informasi - S1", "Rekayasa Perangkat Lunak - S1", "Sains Data & AI - S1", "DKV - S1"] },
@@ -30,6 +32,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState("academic similarity");
   const [faculties, setFaculties] = useState(UNIVERSAL_FACULTIES);
   const [isUploadOpen, setIsUploadOpen] = useState(false);
+  const [showDonateModal, setShowDonateModal] = useState(false);
   const [loading, setLoading] = useState(false);
 
   // Universal Threshold Configuration State
@@ -198,6 +201,7 @@ export default function App() {
         }}
         faculties={faculties}
         onOpenUpload={() => setIsUploadOpen(true)}
+        onOpenDonate={() => setShowDonateModal(true)}
         similarityScore={plagiarismResult?.overallSimilarity || 0}
         aiScore={aiResult?.aiPercentage || 0}
         onRunCheck={() => {
@@ -412,6 +416,12 @@ export default function App() {
         loading={loading}
       />
 
+      {/* Donate Modal */}
+      <DonateModal
+        isOpen={showDonateModal}
+        onClose={() => setShowDonateModal(false)}
+      />
+
       {/* RIUPH Ecosystem Footer */}
       <footer className="no-print bg-slate-950 text-slate-400 py-6 border-t border-slate-800 mt-12 text-xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-wrap items-center justify-between gap-4">
@@ -434,15 +444,25 @@ export default function App() {
             </div>
           </div>
 
-          <div className="text-right text-[11px] text-slate-400">
-            <p>© 2026 RIUPH Holding — Central Technology Command. All rights reserved.</p>
-            <p className="text-slate-500 flex items-center justify-end gap-2 mt-0.5">
-              <span>Universal Higher Education Edition</span>
-              <span>•</span>
-              <a href="/privacy.html" target="_blank" rel="noreferrer" className="text-cyan-400 hover:text-white underline">
-                Kebijakan Privasi
-              </a>
-            </p>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setShowDonateModal(true)}
+              className="text-rose-400 hover:text-rose-300 font-semibold flex items-center gap-1 bg-rose-950/60 hover:bg-rose-900/60 px-3 py-1.5 rounded-lg border border-rose-800/60 transition cursor-pointer"
+            >
+              <Heart className="w-3.5 h-3.5 fill-rose-500 text-rose-500" />
+              Traktir Kopi / Donasi
+            </button>
+            
+            <div className="text-right text-[11px] text-slate-400 hidden sm:block">
+              <p>© 2026 RIUPH Holding — Central Technology Command. All rights reserved.</p>
+              <p className="text-slate-500 flex items-center justify-end gap-2 mt-0.5">
+                <span>Universal Higher Education Edition</span>
+                <span>•</span>
+                <a href="/privacy.html" target="_blank" rel="noreferrer" className="text-cyan-400 hover:text-white underline">
+                  Kebijakan Privasi
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </footer>

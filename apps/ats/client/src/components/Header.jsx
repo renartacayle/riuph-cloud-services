@@ -1,9 +1,9 @@
 import React from "react";
-import { ShieldCheck, Cpu, Sparkles, RefreshCw } from "lucide-react";
+import { ShieldCheck, Cpu, Sparkles, RefreshCw, Heart } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import LanguageSwitcher from "./LanguageSwitcher.jsx";
 
-export default function Header({ onReset, hasResult }) {
+export default function Header({ onReset, hasResult, onOpenDonate }) {
   const { t } = useLanguage();
 
   return (
@@ -30,6 +30,15 @@ export default function Header({ onReset, hasResult }) {
 
         <div className="flex items-center gap-3 text-xs flex-wrap justify-center">
           <LanguageSwitcher />
+
+          <button
+            onClick={onOpenDonate}
+            className="flex items-center gap-1.5 bg-gradient-to-r from-rose-500 to-amber-500 hover:from-rose-600 hover:to-amber-600 text-white font-semibold px-3 py-1.5 rounded-lg shadow-md shadow-rose-500/20 transition transform hover:scale-105"
+            title="Dukung Pengembang / Donate"
+          >
+            <Heart className="w-3.5 h-3.5 fill-white text-white" />
+            <span>Dukung / Donasi</span>
+          </button>
 
           <div className="flex items-center gap-1.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2.5 py-1 rounded-full font-medium">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
