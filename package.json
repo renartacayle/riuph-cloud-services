@@ -8,6 +8,7 @@
     "build:ats": "vite build --config apps/ats/vite.config.js",
     "build:checker": "vite build --config apps/checker/vite.config.js",
     "build": "npm run build:ats && npm run build:checker",
+    "heroku-postbuild": "npm run build",
     "start": "node server.js",
     "server": "node server.js"
   },
