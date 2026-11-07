@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Heart, X, Copy, Check, ExternalLink, Sparkles, ShieldCheck, Wallet, ArrowRight, QrCode } from "lucide-react";
+import { Heart, X, Copy, Check, Download, Sparkles, ShieldCheck, QrCode } from "lucide-react";
 
 export default function DonateModal({ isOpen, onClose }) {
   const [copied, setCopied] = useState(false);
@@ -13,133 +13,86 @@ export default function DonateModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/85 backdrop-blur-sm animate-fade-in overflow-y-auto">
       <div 
-        className="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full shadow-2xl overflow-hidden relative text-white"
+        className="bg-slate-900 border border-slate-800 rounded-3xl max-w-sm sm:max-w-md w-full shadow-2xl overflow-hidden relative text-white my-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Gradient Accent */}
-        <div className="h-2 bg-gradient-to-r from-orange-500 via-rose-500 to-amber-500" />
+        <div className="h-2 bg-gradient-to-r from-red-600 via-rose-500 to-amber-500" />
 
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800 transition cursor-pointer"
+          className="absolute top-4 right-4 text-slate-400 hover:text-white p-1.5 rounded-full hover:bg-slate-800/80 transition cursor-pointer z-10"
           aria-label="Tutup"
         >
           <X className="w-5 h-5" />
         </button>
 
-        <div className="p-6">
-          {/* Creator Profile & Title */}
-          <div className="flex items-center gap-3.5 mb-4">
-            <div className="relative">
-              <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500/20 via-rose-500/20 to-amber-500/20 border border-orange-500/40 flex items-center justify-center text-orange-400 shadow-md">
-                <Heart className="w-6 h-6 fill-rose-500 text-rose-500 animate-pulse" />
-              </div>
-              <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-emerald-500 border-2 border-slate-900 rounded-full" />
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                Dukung Renarta
-                <span className="text-[10px] bg-orange-500/20 text-orange-300 font-semibold px-2 py-0.5 rounded-full border border-orange-500/30">
-                  Tanpa Form / Bebas Ribet
-                </span>
-              </h3>
-              <p className="text-xs text-slate-400">
-                Traktir kopi sukarela untuk server ATS Master HRD
-              </p>
-            </div>
+        <div className="p-5 sm:p-6 text-center">
+          {/* Header Badge & Title */}
+          <div className="inline-flex items-center gap-1.5 bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-semibold px-3 py-1 rounded-full mb-2.5">
+            <Heart className="w-3.5 h-3.5 fill-rose-500 text-rose-500 animate-pulse" />
+            <span>Dukung Server ATS Master</span>
           </div>
 
-          {/* Description banner */}
-          <div className="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3 mb-5 text-xs text-slate-300 leading-relaxed flex items-start gap-2.5">
-            <Sparkles className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-            <span>
-              Layanan ini disediakan 100% gratis. Donasi sukarela tanpa batas minimum sangat berharga untuk menjaga server tetap aktif 24/7.
-            </span>
+          <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
+            Scan QRIS Pembayaran Nasional
+          </h3>
+          <p className="text-xs text-slate-400 mb-4">
+            Bebas isi nominal berapa saja. Tanpa isi formulir atau data pribadi!
+          </p>
+
+          {/* QRIS Image Container Card */}
+          <div className="bg-white rounded-2xl p-3 shadow-xl inline-block max-w-[280px] sm:max-w-[300px] border border-slate-200">
+            <img 
+              src="/qris.jpg" 
+              alt="QRIS RENARTASHOP" 
+              className="w-full h-auto rounded-xl object-contain shadow-inner"
+            />
           </div>
 
-          <div className="space-y-3.5">
-            {/* 1. PRIMARY: ShopeePay Instant Transfer Card */}
-            <div className="p-4 bg-gradient-to-br from-orange-500/15 via-orange-600/10 to-slate-900 border-2 border-orange-500/50 rounded-2xl shadow-xl shadow-orange-950/40 relative overflow-hidden">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-[#EE4D2D] text-white flex items-center justify-center font-black text-sm shadow">
-                    S
-                  </div>
-                  <div>
-                    <span className="text-sm font-bold text-white block">
-                      ShopeePay Transfer
-                    </span>
-                    <span className="text-[11px] text-orange-300">
-                      Transfer Langsung (Tanpa Isi Biodata)
-                    </span>
-                  </div>
-                </div>
-                <span className="text-[10px] font-bold uppercase tracking-wider bg-orange-500/20 text-orange-300 border border-orange-500/40 px-2 py-0.5 rounded-full">
-                  Paling Mudah
-                </span>
-              </div>
+          {/* Payment Methods Pill */}
+          <div className="mt-3.5 flex flex-wrap items-center justify-center gap-1.5 text-[10px] text-slate-300 font-medium">
+            <span className="bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-700/60">BCA</span>
+            <span className="bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-700/60">Mandiri</span>
+            <span className="bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-700/60">BRI</span>
+            <span className="bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-700/60">BNI</span>
+            <span className="bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-700/60">GoPay</span>
+            <span className="bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-700/60">Dana</span>
+            <span className="bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-700/60">OVO</span>
+            <span className="bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-700/60">ShopeePay</span>
+          </div>
 
-              {/* Number Display */}
-              <div className="bg-slate-950/80 border border-orange-500/30 rounded-xl p-3 my-3 flex items-center justify-between">
-                <div>
-                  <div className="text-[10px] uppercase tracking-wider text-slate-400 font-medium">Nomor ShopeePay:</div>
-                  <div className="font-mono text-base font-extrabold text-orange-400 tracking-wide">
-                    0812-2826-3200
-                  </div>
-                  <div className="text-[11px] text-slate-400">a.n. Renarta</div>
-                </div>
-
-                <button
-                  onClick={handleCopyShopee}
-                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition shadow-lg cursor-pointer ${
-                    copied 
-                      ? "bg-emerald-500 text-slate-950 scale-105" 
-                      : "bg-[#EE4D2D] hover:bg-orange-600 text-white hover:scale-105"
-                  }`}
-                >
-                  {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                  <span>{copied ? "Tersalin! ✅" : "Salin Nomor"}</span>
-                </button>
-              </div>
-
-              <div className="text-[11px] text-slate-300 flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-ping" />
-                Buka Shopee ➔ Menu <b>ShopeePay</b> ➔ <b>Transfer</b> ➔ Masukkan nomor di atas.
-              </div>
-            </div>
-
-            {/* 2. SECONDARY: SociaBuzz Tribe (QRIS Semua Bank) */}
+          {/* Download & Copy Buttons */}
+          <div className="mt-4 grid grid-cols-2 gap-2">
             <a
-              href="https://sociabuzz.com/renarta/tribe"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center justify-between p-3.5 bg-slate-800/60 hover:bg-slate-800 border border-slate-700 hover:border-emerald-500/50 rounded-xl transition duration-200"
+              href="/qris.jpg"
+              download="QRIS_RENARTASHOP.jpg"
+              className="flex items-center justify-center gap-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 hover:border-slate-600 text-xs font-semibold py-2.5 px-3 rounded-xl transition cursor-pointer"
             >
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-xs">
-                  <QrCode className="w-4 h-4" />
-                </div>
-                <div>
-                  <div className="text-xs font-semibold text-white group-hover:text-emerald-300 transition flex items-center gap-1">
-                    Mau Scan QRIS (BCA / Mandiri / GoPay / Dana)?
-                    <ExternalLink className="w-3 h-3 opacity-70 group-hover:opacity-100" />
-                  </div>
-                  <div className="text-[11px] text-slate-400">
-                    Bisa via SociaBuzz Tribe (sociabuzz.com/renarta/tribe)
-                  </div>
-                </div>
-              </div>
-              <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-emerald-400 group-hover:translate-x-1 transition" />
+              <Download className="w-3.5 h-3.5 text-cyan-400" />
+              <span>Simpan QRIS</span>
             </a>
+
+            <button
+              onClick={handleCopyShopee}
+              className={`flex items-center justify-center gap-1.5 text-xs font-semibold py-2.5 px-3 rounded-xl transition cursor-pointer shadow ${
+                copied 
+                  ? "bg-emerald-500 text-slate-950 font-bold" 
+                  : "bg-[#EE4D2D] hover:bg-orange-600 text-white"
+              }`}
+            >
+              {copied ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+              <span>{copied ? "Tersalin! ✅" : "No. ShopeePay"}</span>
+            </button>
           </div>
 
           {/* Footer Guarantee */}
-          <div className="mt-5 pt-3 border-t border-slate-800 text-[11px] text-slate-500 text-center flex items-center justify-center gap-1.5">
+          <div className="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-500 text-center flex items-center justify-center gap-1.5">
             <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" />
-            100% donasi diterima langsung oleh Renarta tanpa potongan pihak ketiga.
+            Standar Pembayaran Nasional QRIS / GPN (a.n. RENARTASHOP)
           </div>
         </div>
       </div>
